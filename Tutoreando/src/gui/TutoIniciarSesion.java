@@ -19,10 +19,11 @@ public class TutoIniciarSesion extends javax.swing.JFrame {
      */
     public TutoIniciarSesion() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Tutoreando");
-        this.setLocationRelativeTo(null);
         setResizable(false);
-        
+        jPanel1.requestFocus(false);
+        this.setSize(new Dimension(900, 620));
         //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
 
@@ -55,7 +56,8 @@ public class TutoIniciarSesion extends javax.swing.JFrame {
         jLabel1.setText("TUTOREANDO");
 
         btnIniciarSesion.setBackground(new java.awt.Color(153, 0, 253));
-        btnIniciarSesion.setFont(new java.awt.Font("Yu Gothic", 1, 11)); // NOI18N
+        btnIniciarSesion.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        btnIniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
         btnIniciarSesion.setText("Iniciar Sesión");
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,7 +129,7 @@ public class TutoIniciarSesion extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(189, Short.MAX_VALUE)
+                .addContainerGap(193, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(179, 179, 179))
         );

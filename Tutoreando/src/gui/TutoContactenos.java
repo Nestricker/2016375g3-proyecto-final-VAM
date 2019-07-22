@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.Dimension;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,17 +20,14 @@ public class TutoContactenos extends javax.swing.JFrame {
      */
     public TutoContactenos() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Tutoreando");
         setResizable(false);
-        
+        jPanel1.requestFocus(false);
+        this.setSize(new Dimension(900, 620));
         //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
-
-        
-        this.setLocationRelativeTo(null);
-        
-       
-        
+  
     }
 
     /**
@@ -61,7 +59,7 @@ public class TutoContactenos extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/redesSociales.PNG"))); // NOI18N
 
         btnVolver.setBackground(new java.awt.Color(153, 0, 255));
-        btnVolver.setFont(new java.awt.Font("Yu Gothic", 0, 14)); // NOI18N
+        btnVolver.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnVolver.setForeground(new java.awt.Color(255, 255, 255));
         btnVolver.setText("Volver");
         btnVolver.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -101,8 +99,8 @@ public class TutoContactenos extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(btnVolver)
+                .addGap(18, 18, 18)
+                .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
                 .addGap(25, 25, 25)
                 .addComponent(jLabel3)
                 .addGap(27, 27, 27))
@@ -122,7 +120,7 @@ public class TutoContactenos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(191, 191, 191)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,6 +130,7 @@ public class TutoContactenos extends javax.swing.JFrame {
         TutoFrame a = new TutoFrame();
         a.setVisible(true);
         this.setVisible(false);
+        btnVolver.setFocusable(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     /**

@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.Dimension;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,24 +20,15 @@ public class TutoMenuEstudiante extends javax.swing.JFrame {
     public TutoMenuEstudiante(String correo) {
         this.correo = correo;
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Tutoreando");
         setResizable(false);
-        this.setLocationRelativeTo(null);
-        
+        jPanel1.requestFocus(false);
+        this.setSize(new Dimension(900, 620));
         //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
 
         
-    }
-
-    private void deshabilitar(){
-        
-        //this.rbtFemenino.setEnabled(false);
-        
-        //Limpiar cuadro de texto
-        
-        //this.txtNombre.setText("");
-        //this.txtApellido.setText("");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,7 +49,6 @@ public class TutoMenuEstudiante extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 620));
 
         jButton1.setBackground(new java.awt.Color(153, 0, 255));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));

@@ -3,7 +3,7 @@ package data;
 import java.util.ArrayList;
 import ui.Tutofaz;
 
-public class Usuario implements Tutofaz {
+public abstract class Usuario implements Tutofaz {
 
     private String documento;
     private String clave;

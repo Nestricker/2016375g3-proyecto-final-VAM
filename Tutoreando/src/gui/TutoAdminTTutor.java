@@ -6,7 +6,8 @@
 package gui;
 
 import javax.swing.ImageIcon;
-
+import businessLogic.TutoApp;
+import java.awt.Dimension;
 /**
  *
  * @author spley
@@ -18,25 +19,25 @@ public class TutoAdminTTutor extends javax.swing.JFrame {
      */
     public TutoAdminTTutor() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Tutoreando");
         setResizable(false);
-        this.setLocationRelativeTo(null);
-        
+        jPanel1.requestFocus(false);
+        this.setSize(new Dimension(900, 620));
         //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
 
-        
         habilitar(false);
         cargarTutoria();
     }
     private void cargarTutoria(){
         
-        String registro [][]= new String[TutoAppGUI.filtrarTutoriasModificables(TutoMenuEstudiante.correo).size()][4];
-            for(int i = 0; i<TutoAppGUI.filtrarTutoriasModificables(TutoMenuEstudiante.correo).size();i++){
+        String registro [][]= new String[TutoApp.filtrarTutoriasModificables(TutoMenuEstudiante.correo).size()][4];
+            for(int i = 0; i<TutoApp.filtrarTutoriasModificables(TutoMenuEstudiante.correo).size();i++){
                 registro[i][0] = Integer.toString(i+1);
-                registro[i][1] = TutoAppGUI.filtrarTutoriasModificables(TutoMenuEstudiante.correo).get(i).getHora();
-                registro[i][2] = TutoAppGUI.filtrarTutoriasModificables(TutoMenuEstudiante.correo).get(i).getLugar();
-                registro[i][3] = TutoAppGUI.filtrarTutoriasModificables(TutoMenuEstudiante.correo).get(i).getMateria();
+                registro[i][1] = TutoApp.filtrarTutoriasModificables(TutoMenuEstudiante.correo).get(i).getHora();
+                registro[i][2] = TutoApp.filtrarTutoriasModificables(TutoMenuEstudiante.correo).get(i).getLugar();
+                registro[i][3] = TutoApp.filtrarTutoriasModificables(TutoMenuEstudiante.correo).get(i).getMateria();
 
                 }
             tablaTutorias.setModel(new javax.swing.table.DefaultTableModel(
@@ -50,6 +51,7 @@ public class TutoAdminTTutor extends javax.swing.JFrame {
         this.cbxMateria.setEnabled(a);
         this.cbxLugar.setEnabled(a);
         this.cbxHora.setEnabled(a);
+        this.btnGuardar.setEnabled(a);
     }
 
     /**
@@ -74,13 +76,12 @@ public class TutoAdminTTutor extends javax.swing.JFrame {
         cbxHora = new javax.swing.JComboBox<>();
         cbxLugar = new javax.swing.JComboBox<>();
         cbxMateria = new javax.swing.JComboBox<>();
-        jButton7 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 620));
 
         jButton1.setBackground(new java.awt.Color(255, 204, 51));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -133,6 +134,9 @@ public class TutoAdminTTutor extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tablaTutorias);
+        if (tablaTutorias.getColumnModel().getColumnCount() > 0) {
+            tablaTutorias.getColumnModel().getColumn(0).setPreferredWidth(20);
+        }
 
         jButton5.setBackground(new java.awt.Color(153, 0, 255));
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
@@ -164,12 +168,12 @@ public class TutoAdminTTutor extends javax.swing.JFrame {
 
         cbxMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quimica", "Matematicas", "Fisica" }));
 
-        jButton7.setBackground(new java.awt.Color(153, 0, 255));
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Guardar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(153, 0, 255));
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
@@ -206,7 +210,7 @@ public class TutoAdminTTutor extends javax.swing.JFrame {
                                 .addComponent(cbxMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(121, 121, 121)
-                                .addComponent(jButton7))
+                                .addComponent(btnGuardar))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton6)
@@ -226,7 +230,7 @@ public class TutoAdminTTutor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxLugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7)
+                    .addComponent(btnGuardar)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -303,16 +307,15 @@ public class TutoAdminTTutor extends javax.swing.JFrame {
         habilitar(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        TutoAppGUI.agregarTutoriaT(TutoMenuEstudiante.correo, this.cbxMateria.getSelectedItem().toString(),
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        TutoApp.agregarTutoriaT(TutoMenuEstudiante.correo, this.cbxMateria.getSelectedItem().toString(),
                 this.cbxHora.getSelectedItem().toString(), this.cbxLugar.getSelectedItem().toString());
-        habilitar(true);
+        habilitar(false);
         cargarTutoria();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        TutoAppGUI.Tutores.get(TutoMenuEstudiante.correo).getListaTutorias().
-                remove(TutoAppGUI.filtrarTutoriasModificables(TutoMenuEstudiante.
+        TutoApp.cancelarTutoriaT(TutoMenuEstudiante.correo, TutoApp.filtrarTutoriasModificables(TutoMenuEstudiante.
                         correo).get(Integer.parseInt(txtDELETE.getText())-1));
         cargarTutoria();
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -353,6 +356,7 @@ public class TutoAdminTTutor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cbxHora;
     private javax.swing.JComboBox<String> cbxLugar;
     private javax.swing.JComboBox<String> cbxMateria;
@@ -362,7 +366,6 @@ public class TutoAdminTTutor extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

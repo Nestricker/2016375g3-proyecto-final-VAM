@@ -1,15 +1,15 @@
 
 package data;
 
-public class Tutoria {
+import java.io.Serializable;
+
+public class Tutoria implements Serializable{
     private Tutor tutor;
     private Estudiante estudiante;
     private String materia;
     private String hora;
     private String lugar;
 
-    public Tutoria() {
-    }
 
     public Tutor getTutor() {
         return tutor;

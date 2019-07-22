@@ -5,6 +5,9 @@
  */
 package gui;
 
+import businessLogic.TutoApp;
+import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.ImageIcon;
 
 /**
@@ -18,18 +21,18 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
      */
     public TutoPerfilEstudiante() {
         initComponents();
+        setLocationRelativeTo(null);
+        this.setSize(new Dimension(900, 620));
         setTitle("Tutoreando");
         setResizable(false);
-        this.setLocationRelativeTo(null);
-        
+        jPanel2.requestFocus(false);
         //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
-        
-        txtNombre.setText(TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getNombres());
-        txtApellido.setText(TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getApellidos());
-        txtContra.setText(TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getClave());
-        txtCarrera.setText(TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getPrograma());
-        txtDocumento.setText(TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getDocumento());
+        txtNombre.setText(TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getNombres());
+        txtApellido.setText(TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getApellidos());
+        txtContraseñaIS.setText(TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getClave());
+        txtCarrera.setText(TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getPrograma());
+        txtDocumento.setText(TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getDocumento());
         txtCorreo.setText(TutoMenuEstudiante.correo);
         this.txtCorreo.setEnabled(false);
         habilitar(false);
@@ -38,7 +41,7 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
     private void habilitar(boolean a){
         this.txtNombre.setEnabled(a);
         this.txtApellido.setEnabled(a);
-        this.txtContra.setEnabled(a);
+        this.txtContraseñaIS.setEnabled(a);
         this.txtCarrera.setEnabled(a);
         this.txtDocumento.setEnabled(a);
     }
@@ -71,11 +74,10 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
         txtDocumento = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtContra = new javax.swing.JTextField();
+        txtContraseñaIS = new javax.swing.JPasswordField();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 620));
 
         jButton1.setBackground(new java.awt.Color(153, 0, 255));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -136,8 +138,11 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
 
         jLabel1.setText("Nombres:");
 
+        txtNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
         jLabel2.setText("Apellidos:");
 
+        txtApellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txtApellido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtApellidoActionPerformed(evt);
@@ -146,8 +151,13 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
 
         jLabel3.setText("Carrera");
 
+        txtCarrera.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
         jLabel4.setText("Correo:");
 
+        txtCorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        txtDocumento.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         txtDocumento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDocumentoActionPerformed(evt);
@@ -157,6 +167,19 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
         jLabel5.setText("Documento:");
 
         jLabel6.setText("Contraseña:");
+
+        txtContraseñaIS.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        txtContraseñaIS.setToolTipText("");
+        txtContraseñaIS.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtContraseñaIS.setPreferredSize(new java.awt.Dimension(6, 20));
+        txtContraseñaIS.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtContraseñaISFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtContraseñaISFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -199,7 +222,7 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(txtContraseñaIS, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -218,12 +241,13 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtContraseñaIS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)))
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
                     .addComponent(jButton7))
@@ -284,9 +308,9 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
+                .addContainerGap(127, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(236, Short.MAX_VALUE))
         );
 
         pack();
@@ -333,13 +357,37 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        TutoAppGUI.modificarApellidos(TutoMenuEstudiante.correo, txtApellido.getText());
-        TutoAppGUI.modificarClave(TutoMenuEstudiante.correo, txtContra.getText());
-        TutoAppGUI.modificarDocumento(TutoMenuEstudiante.correo, txtDocumento.getText());
-        TutoAppGUI.modificarNombres(TutoMenuEstudiante.correo, txtNombre.getText());
-        TutoAppGUI.modificarPrograma(TutoMenuEstudiante.correo, txtCarrera.getText());
+        char[] a = txtContraseñaIS.getPassword();
+        String pass = new String(a);
+        TutoApp.modificarApellidos(TutoMenuEstudiante.correo, txtApellido.getText());
+        TutoApp.modificarClave(TutoMenuEstudiante.correo, pass);
+        TutoApp.modificarDocumento(TutoMenuEstudiante.correo, txtDocumento.getText());
+        TutoApp.modificarNombres(TutoMenuEstudiante.correo, txtNombre.getText());
+        TutoApp.modificarPrograma(TutoMenuEstudiante.correo, txtCarrera.getText());
         habilitar(false);
+        txtContraseñaIS.setEchoChar('•');
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void txtContraseñaISFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseñaISFocusGained
+        char[] arrayC = txtContraseñaIS.getPassword();
+        String pass = new String(arrayC);
+        if(pass.trim().equals(TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getClave())){
+            txtContraseñaIS.setText(TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getClave());
+            txtContraseñaIS.setEchoChar((char)0);
+        }
+        txtContraseñaIS.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtContraseñaISFocusGained
+
+    private void txtContraseñaISFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseñaISFocusLost
+        char[] arrayC = txtContraseñaIS.getPassword();
+        String pass = new String(arrayC);
+        if(pass.trim().equals(TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getClave())){
+            txtContraseñaIS.setEchoChar('•');
+            
+            
+        }
+        txtContraseñaIS.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtContraseñaISFocusLost
 
     /**
      * @param args the command line arguments
@@ -394,7 +442,7 @@ public class TutoPerfilEstudiante extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCarrera;
-    private javax.swing.JTextField txtContra;
+    private javax.swing.JPasswordField txtContraseñaIS;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDocumento;
     private javax.swing.JTextField txtNombre;

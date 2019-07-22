@@ -5,11 +5,7 @@
  */
 package gui;
 
-import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
 import java.awt.Dimension;
 
 /**
@@ -24,10 +20,11 @@ public class TutoMenuTutor extends javax.swing.JFrame {
      */
     public TutoMenuTutor() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Tutoreando");
         setResizable(false);
-        this.setLocationRelativeTo(null);
-        
+        jPanel1.requestFocus(false);
+        this.setSize(new Dimension(900, 620));
         //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
         

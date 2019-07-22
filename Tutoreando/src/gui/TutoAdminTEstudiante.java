@@ -6,6 +6,8 @@
 package gui;
 
 import javax.swing.ImageIcon;
+import businessLogic.TutoApp;
+import java.awt.Dimension;
 
 /**
  *
@@ -18,47 +20,40 @@ public class TutoAdminTEstudiante extends javax.swing.JFrame {
      */
     public TutoAdminTEstudiante() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Tutoreando");
         setResizable(false);
-        
+        this.setSize(new Dimension(900, 620));
+        jPanel2.requestFocus(false);
         //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
 
         
-        this.setLocationRelativeTo(null);
         cargarTutoria();
+        
     }
     
     private void cargarTutoria(){
         
-        String registro [][]= new String[TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().size()][5];
-            for(int i = 0; i<TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().size();i++){
+        String registro [][]= new String[TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().size()][6];
+            for(int i = 0; i<TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().size();i++){
                 registro[i][0] = Integer.toString(i+1);
-                registro[i][1] = TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.
+                registro[i][1] = TutoApp.Estudiantes.get(TutoMenuEstudiante.
                         correo).getListaTutorias().get(i).getTutor().getNombres();
-                registro[i][2] = TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().get(i).getHora();
-                registro[i][3] = TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().get(i).getLugar();
-                registro[i][4] = TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().get(i).getMateria();
-
+                registro[i][2] = TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().get(i).getTutor().getNumeroCelular();
+                registro[i][3] = TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().get(i).getHora();
+                registro[i][4] = TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().get(i).getLugar();
+                registro[i][5] = TutoApp.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().get(i).getMateria();
+                
                 }
             tablaTutorias.setModel(new javax.swing.table.DefaultTableModel(
             registro,
             new String [] {
-                "N°", "Tutor", "Hora", "Lugar", "Materia"
+                "N°", "Tutor", "Celular", "Hora", "Lugar", "Materia"
             }
         ));
             }
-    
-    private void deshabilitar(){
         
-        //this.rbtFemenino.setEnabled(false);
-        
-        //Limpiar cuadro de texto
-        
-        //this.txtNombre.setText("");
-        //this.txtApellido.setText("");
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,7 +76,6 @@ public class TutoAdminTEstudiante extends javax.swing.JFrame {
         tablaTutorias = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 620));
 
         jButton1.setBackground(new java.awt.Color(153, 0, 255));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -196,16 +190,20 @@ public class TutoAdminTEstudiante extends javax.swing.JFrame {
 
         tablaTutorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "N°", "Tutor", "Hora", "Lugar", "Materia"
+                "N°", "Tutor", "Hora", "Lugar", "Materia", "Celular"
             }
         ));
         jScrollPane2.setViewportView(tablaTutorias);
+        if (tablaTutorias.getColumnModel().getColumnCount() > 0) {
+            tablaTutorias.getColumnModel().getColumn(0).setPreferredWidth(20);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,7 +213,7 @@ public class TutoAdminTEstudiante extends javax.swing.JFrame {
                 .addGap(200, 200, 200)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(248, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -223,9 +221,9 @@ public class TutoAdminTEstudiante extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(188, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(171, 171, 171))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(180, 180, 180))
         );
 
         pack();
@@ -260,7 +258,7 @@ public class TutoAdminTEstudiante extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btncancelarTutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarTutoActionPerformed
-        TutoAppGUI.cancelarTutoriaE(TutoMenuEstudiante.correo, Integer.parseInt(txtNumeroC.getText())-1);
+        TutoApp.cancelarTutoriaE(TutoMenuEstudiante.correo, Integer.parseInt(txtNumeroC.getText())-1);
         cargarTutoria();
     }//GEN-LAST:event_btncancelarTutoActionPerformed
 

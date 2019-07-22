@@ -1,6 +1,5 @@
 package gui;
 
-import data.Tutoria;
 import java.awt.Dimension;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -15,9 +14,12 @@ public class TutoFrame extends javax.swing.JFrame {
     
     public TutoFrame() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Tutoreando");
-        this.setLocationRelativeTo(null);
         setResizable(false);
+        jPanel1.requestFocus();
+        this.setSize(new Dimension(900, 620));
+
 
 //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
@@ -48,7 +50,7 @@ public class TutoFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtPublicidad = new javax.swing.JTextArea();
         btnContactarnos = new javax.swing.JButton();
         btnIngresar = new javax.swing.JButton();
 
@@ -60,18 +62,18 @@ public class TutoFrame extends javax.swing.JFrame {
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jTextArea1.setText("                 \n                 Accede a tutorías \n        con los mejores estudiantes\n        de la Universidad Nacional");
-        jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTextArea1.setHighlighter(null);
-        jTextArea1.setMargin(new java.awt.Insets(1, 1, 1, 1));
-        jTextArea1.setName(""); // NOI18N
-        jScrollPane1.setViewportView(jTextArea1);
-        jTextArea1.getAccessibleContext().setAccessibleName("");
+        txtPublicidad.setEditable(false);
+        txtPublicidad.setColumns(20);
+        txtPublicidad.setFont(new java.awt.Font("Yu Gothic", 1, 14)); // NOI18N
+        txtPublicidad.setRows(5);
+        txtPublicidad.setText("                 \n                 Accede a tutorías \n        con los mejores estudiantes\n        de la Universidad Nacional");
+        txtPublicidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtPublicidad.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        txtPublicidad.setHighlighter(null);
+        txtPublicidad.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        txtPublicidad.setName(""); // NOI18N
+        jScrollPane1.setViewportView(txtPublicidad);
+        txtPublicidad.getAccessibleContext().setAccessibleName("");
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(76, 120, 270, 130);
@@ -106,7 +108,7 @@ public class TutoFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
         );
 
         pack();
@@ -122,6 +124,7 @@ public class TutoFrame extends javax.swing.JFrame {
         TutoContactenos d = new TutoContactenos();
         d.setVisible(true);
         this.setVisible(false);
+        btnContactarnos.setRolloverEnabled(false);
     }//GEN-LAST:event_btnContactarnosActionPerformed
 
     /**
@@ -165,6 +168,6 @@ public class TutoFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnIngresar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea txtPublicidad;
     // End of variables declaration//GEN-END:variables
 }

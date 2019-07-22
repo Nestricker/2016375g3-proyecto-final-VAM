@@ -1,15 +1,11 @@
 
 package data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tutor extends Usuario {
-    
+public class Tutor extends Usuario implements Serializable{
     private String numeroCelular;
-
-    public Tutor() {
-        super(null,null,null,null,null,null,null);
-    }
 
     public String getNumeroCelular() {
         return numeroCelular;

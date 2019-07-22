@@ -5,10 +5,12 @@
  */
 package gui;
 
-import data.Tutoria;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
+import businessLogic.TutoApp;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 /**
  *
  * @author yovan
@@ -17,14 +19,17 @@ public class Registro extends javax.swing.JFrame {
     
     public Registro() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Tutoreando");
         setResizable(false);
+        jPanel2.requestFocus(false);
         
+        this.setSize(new Dimension(900, 620));
         //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
 
-        
-        this.setLocationRelativeTo(null);    
+        txtContraseñaR.setEchoChar((char)0); 
+        setLocationRelativeTo(null);    
     }
 
     /**
@@ -51,7 +56,7 @@ public class Registro extends javax.swing.JFrame {
         btnRegistroR = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtContraseñaR = new javax.swing.JTextField();
+        txtContraseñaR = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,6 +119,8 @@ public class Registro extends javax.swing.JFrame {
         txtCorreoR.setFont(new java.awt.Font("Arial", 2, 11)); // NOI18N
         txtCorreoR.setText("Correo electronico");
         txtCorreoR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtCorreoR.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtCorreoR.setFocusTraversalPolicyProvider(true);
         txtCorreoR.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtCorreoRFocusGained(evt);
@@ -201,7 +208,7 @@ public class Registro extends javax.swing.JFrame {
         btnRegistroR.setBackground(new java.awt.Color(153, 0, 255));
         btnRegistroR.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistroR.setText("Registrarse");
-        btnRegistroR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        btnRegistroR.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 0, 255), 1, true));
         btnRegistroR.setBorderPainted(false);
         btnRegistroR.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegistroR.addActionListener(new java.awt.event.ActionListener() {
@@ -213,15 +220,22 @@ public class Registro extends javax.swing.JFrame {
         jLabel4.setText("Aceptas condiciones y politicas");
 
         txtContraseñaR.setBackground(new java.awt.Color(204, 204, 204));
-        txtContraseñaR.setFont(new java.awt.Font("Arial", 2, 11)); // NOI18N
+        txtContraseñaR.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         txtContraseñaR.setText("Contraseña");
+        txtContraseñaR.setToolTipText("");
         txtContraseñaR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtContraseñaR.setPreferredSize(new java.awt.Dimension(111, 16));
         txtContraseñaR.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtContraseñaRFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtContraseñaRFocusLost(evt);
+            }
+        });
+        txtContraseñaR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContraseñaRActionPerformed(evt);
             }
         });
 
@@ -246,8 +260,12 @@ public class Registro extends javax.swing.JFrame {
                             .addComponent(txtDocumentoR)
                             .addComponent(txtCarreraR)
                             .addComponent(txtCelularR)
-                            .addComponent(txtContraseñaR, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(txtContraseñaR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(38, 38, 38))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jLabel4)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -257,10 +275,6 @@ public class Registro extends javax.swing.JFrame {
                         .addGap(214, 214, 214)
                         .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel4)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,10 +294,10 @@ public class Registro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtCarreraR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtCelularR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtCelularR, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtContraseñaR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
+                .addGap(13, 13, 13)
                 .addComponent(btnRegistroR, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
@@ -412,32 +426,59 @@ public class Registro extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnIniciarSesionRActionPerformed
 
-    private void txtContraseñaRFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseñaRFocusGained
-        if(txtContraseñaR.getText().trim().equals("Contraseña")){
-            txtContraseñaR.setText("");
-        }
-        txtContraseñaR.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txtContraseñaRFocusGained
-
-    private void txtContraseñaRFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseñaRFocusLost
-        if(txtContraseñaR.getText().trim().equals("")){
-            txtContraseñaR.setText("Contraseña");
-        }
-        txtContraseñaR.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txtContraseñaRFocusLost
-
     private void txtCelularRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCelularRActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCelularRActionPerformed
 
     private void btnRegistroRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroRActionPerformed
-        TutoAppGUI.crearUsuario(txtDocumentoR.getText(),txtContraseñaR.getText()
+        char[] arrayC = txtContraseñaR.getPassword();
+        String pass = new String(arrayC);
+        if(!txtApellidosR.equals("Apellidos") && !txtCarreraR.equals("Carrera") && !txtCelularR.equals("Celular") 
+                && !pass.equals("Contraseña") && !txtCorreoR.equals("Correo electronico") &&
+                !txtDocumentoR.equals("Documento")&& !txtNombresR.equals("Nombres")){
+            if(TutoApp.documentoRegistrado(txtDocumentoR.getText())){
+            JOptionPane.showMessageDialog(new JFrame(),"Ya existe un usuario con este Documento","Error 15#0!",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }else if(TutoApp.correoRegistrado(txtCorreoR.getText())){
+            JOptionPane.showMessageDialog(new JFrame(),"Este correo ya esta registrado","Error 16#0!",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }else{
+        TutoApp.crearUsuario(txtDocumentoR.getText(),pass
                 ,txtNombresR.getText(),txtApellidosR.getText(),txtCarreraR.getText()
                 ,txtCorreoR.getText(),txtCelularR.getText());
         TutoIniciarSesion j = new TutoIniciarSesion();
         j.setVisible(true);
         this.setVisible(false);
+        }
+        }else{
+            JOptionPane.showMessageDialog(new JFrame(),"RELLENE TODOS LOS CAMPOS","Error 15#0!",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistroRActionPerformed
+
+    private void txtContraseñaRFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseñaRFocusGained
+        char[] arrayC = txtContraseñaR.getPassword();
+        String pass = new String(arrayC);
+        if(pass.trim().equals("Contraseña")){
+            txtContraseñaR.setText("");
+            txtContraseñaR.setEchoChar('•');
+        }
+        txtContraseñaR.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtContraseñaRFocusGained
+
+    private void txtContraseñaRFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseñaRFocusLost
+        char[] arrayC = txtContraseñaR.getPassword();
+        String pass = new String(arrayC);
+        if(pass.trim().equals("")){
+            txtContraseñaR.setText("Contraseña");
+            txtContraseñaR.setEchoChar((char)0);
+        }
+        txtContraseñaR.setForeground(Color.BLACK);   
+    }//GEN-LAST:event_txtContraseñaRFocusLost
+
+    private void txtContraseñaRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaRActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraseñaRActionPerformed
 
     /**
      * @param args the command line arguments
@@ -487,7 +528,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellidosR;
     private javax.swing.JTextField txtCarreraR;
     private javax.swing.JTextField txtCelularR;
-    private javax.swing.JTextField txtContraseñaR;
+    private javax.swing.JPasswordField txtContraseñaR;
     private javax.swing.JTextField txtCorreoR;
     private javax.swing.JTextField txtDocumentoR;
     private javax.swing.JTextField txtNombresR;

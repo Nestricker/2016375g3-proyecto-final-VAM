@@ -5,12 +5,9 @@
  */
 package gui;
 
-import data.Tutor;
-import data.Tutoria;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.table.DefaultTableModel;
-
+import businessLogic.TutoApp;
+import java.awt.Dimension;
 /**
  *
  * @author spley
@@ -22,22 +19,23 @@ public class TutoPedirTEstudiante extends javax.swing.JFrame {
      */
     public TutoPedirTEstudiante() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Tutoreando");
         setResizable(false);
-        this.setLocationRelativeTo(null);
-        
+        jPanel2.requestFocus(false);
+        this.setSize(new Dimension(900, 620));
         //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
         
     }
     
     private void cargarTutoria(String materia){
-        String registro [][]= new String[TutoAppGUI.filtrarTutoria(TutoMenuEstudiante.correo, materia).size()][4];
-            for(int i = 0; i<TutoAppGUI.filtrarTutoria(TutoMenuEstudiante.correo, materia).size();i++){
+        String registro [][]= new String[TutoApp.filtrarTutoria(TutoMenuEstudiante.correo, materia).size()][4];
+            for(int i = 0; i<TutoApp.filtrarTutoria(TutoMenuEstudiante.correo, materia).size();i++){
                 registro[i][0] = Integer.toString(i+1);
-                registro[i][1] = TutoAppGUI.filtrarTutoria(TutoMenuEstudiante.correo, materia).get(i).getTutor().getNombres();
-                registro[i][2] = TutoAppGUI.filtrarTutoria(TutoMenuEstudiante.correo, materia).get(i).getHora();
-                registro[i][3] = TutoAppGUI.filtrarTutoria(TutoMenuEstudiante.correo, materia).get(i).getLugar();
+                registro[i][1] = TutoApp.filtrarTutoria(TutoMenuEstudiante.correo, materia).get(i).getTutor().getNombres();
+                registro[i][2] = TutoApp.filtrarTutoria(TutoMenuEstudiante.correo, materia).get(i).getHora();
+                registro[i][3] = TutoApp.filtrarTutoria(TutoMenuEstudiante.correo, materia).get(i).getLugar();
 
                 }
             tablaTutorias.setModel(new javax.swing.table.DefaultTableModel(
@@ -212,6 +210,9 @@ public class TutoPedirTEstudiante extends javax.swing.JFrame {
             }
         ));
         tablaTutoria.setViewportView(tablaTutorias);
+        if (tablaTutorias.getColumnModel().getColumnCount() > 0) {
+            tablaTutorias.getColumnModel().getColumn(0).setPreferredWidth(20);
+        }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -223,8 +224,8 @@ public class TutoPedirTEstudiante extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tablaTutoria, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                .addGap(51, 51, 51))
+                .addComponent(tablaTutoria, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -282,11 +283,7 @@ public class TutoPedirTEstudiante extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         int j = Integer.parseInt(txtNumero.getText());
         String x= this.ComboMateria.getSelectedItem().toString();
-        TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias().
-                add(TutoAppGUI.filtrarTutoria(TutoMenuEstudiante.correo, x).get(j-1));
-        TutoAppGUI.filtrarTutoria(TutoMenuEstudiante.correo, x).get(j-1).
-                setEstudiante(TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo));
-        System.out.println(TutoAppGUI.Estudiantes.get(TutoMenuEstudiante.correo).getListaTutorias());
+        TutoApp.tomarTutoriaE(TutoMenuEstudiante.correo, (TutoApp.filtrarTutoria(TutoMenuEstudiante.correo, x).get(j-1)));
         cargarTutoria(this.ComboMateria.getSelectedItem().toString());
     }//GEN-LAST:event_jButton6ActionPerformed
 

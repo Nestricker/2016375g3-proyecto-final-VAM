@@ -6,10 +6,11 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import businessLogic.TutoApp;
+import java.awt.Dimension;
 
 /**
  *
@@ -22,14 +23,15 @@ public class IniciarSesion extends javax.swing.JFrame {
      */
     public IniciarSesion() {
         initComponents();
+        setLocationRelativeTo(null);
         setTitle("Tutoreando");
-        
+        jPanel2.requestFocus(false);
         //ICON
         setIconImage(new ImageIcon(getClass().getResource("/resources/logo.png")).getImage());
-
+        this.setSize(new Dimension(900, 620));
         
         setResizable(false);
-        this.setLocationRelativeTo(null);
+        txtContraseñaIS.setEchoChar((char)0);
         
         
     }
@@ -48,8 +50,8 @@ public class IniciarSesion extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         txtCorreoIngreso = new javax.swing.JTextField();
         btnIniciarSesion = new javax.swing.JButton();
-        txtContraseñaIngreso = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        txtContraseñaIS = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -107,26 +109,23 @@ public class IniciarSesion extends javax.swing.JFrame {
             }
         });
 
-        txtContraseñaIngreso.setBackground(new java.awt.Color(204, 204, 204));
-        txtContraseñaIngreso.setFont(new java.awt.Font("Arial", 2, 12)); // NOI18N
-        txtContraseñaIngreso.setText("Contraseña");
-        txtContraseñaIngreso.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtContraseñaIngreso.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtContraseñaIngresoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtContraseñaIngresoFocusLost(evt);
-            }
-        });
-        txtContraseñaIngreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseñaIngresoActionPerformed(evt);
-            }
-        });
-
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setText("TUTOREANDO");
+
+        txtContraseñaIS.setBackground(new java.awt.Color(204, 204, 204));
+        txtContraseñaIS.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        txtContraseñaIS.setText("Contraseña");
+        txtContraseñaIS.setToolTipText("");
+        txtContraseñaIS.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtContraseñaIS.setPreferredSize(new java.awt.Dimension(111, 16));
+        txtContraseñaIS.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtContraseñaISFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtContraseñaISFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -136,16 +135,16 @@ public class IniciarSesion extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtCorreoIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                            .addComponent(txtContraseñaIngreso))
-                        .addGap(52, 52, 52))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))))
+                        .addGap(78, 78, 78))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtCorreoIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(txtContraseñaIS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(52, 52, 52))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,8 +154,8 @@ public class IniciarSesion extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(txtCorreoIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(txtContraseñaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(txtContraseñaIS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
         );
@@ -229,18 +228,8 @@ public class IniciarSesion extends javax.swing.JFrame {
        Registro a = new Registro(); 
        a.setVisible(true);
        this.setVisible(false);
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
-
-    private void txtContraseñaIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaIngresoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseñaIngresoActionPerformed
-
-    private void txtContraseñaIngresoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseñaIngresoFocusGained
-        if(txtContraseñaIngreso.getText().trim().equals("Contraseña")){
-            txtContraseñaIngreso.setText("");
-        }
-        txtContraseñaIngreso.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txtContraseñaIngresoFocusGained
 
     private void txtCorreoIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoIngresoActionPerformed
         // TODO add your handling code here:
@@ -260,23 +249,38 @@ public class IniciarSesion extends javax.swing.JFrame {
         txtCorreoIngreso.setForeground(Color.BLACK);
     }//GEN-LAST:event_txtCorreoIngresoFocusLost
 
-    private void txtContraseñaIngresoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseñaIngresoFocusLost
-        if(txtContraseñaIngreso.getText().trim().equals("")){
-            txtContraseñaIngreso.setText("Contraseña");
-        }
-        txtContraseñaIngreso.setForeground(Color.BLACK);
-    }//GEN-LAST:event_txtContraseñaIngresoFocusLost
-
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        if(TutoAppGUI.VerificarDatos(txtCorreoIngreso.getText(), txtContraseñaIngreso.getText())){
+        char[] p = txtContraseñaIS.getPassword();
+        String pass = new String(p);
+        if(TutoApp.verificarDatos(txtCorreoIngreso.getText(), pass)){
             TutoMenuEstudiante j = new TutoMenuEstudiante(txtCorreoIngreso.getText());
             j.setVisible(true);
             this.setVisible(false);
         }else{
-            JOptionPane.showMessageDialog(new JFrame(),"Contraseña incorrecta\\Usuario no registrado","Error 17#0!",
-            JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new JFrame(),"Correo o contraeña incorrecto","Error 17#0!",
+            JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void txtContraseñaISFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseñaISFocusGained
+        char[] arrayC = txtContraseñaIS.getPassword();
+        String pass = new String(arrayC);
+        if(pass.trim().equals("Contraseña")){
+            txtContraseñaIS.setText("");
+            txtContraseñaIS.setEchoChar('•');
+        }
+        txtContraseñaIS.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtContraseñaISFocusGained
+
+    private void txtContraseñaISFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtContraseñaISFocusLost
+        char[] arrayC = txtContraseñaIS.getPassword();
+        String pass = new String(arrayC);
+        if(pass.trim().equals("")){
+            txtContraseñaIS.setText("Contraseña");
+            txtContraseñaIS.setEchoChar((char)0);
+        }   
+        txtContraseñaIS.setForeground(Color.BLACK);
+    }//GEN-LAST:event_txtContraseñaISFocusLost
 
     /**
      * @param args the command line arguments
@@ -299,7 +303,7 @@ public class IniciarSesion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField txtContraseñaIngreso;
+    private javax.swing.JPasswordField txtContraseñaIS;
     private javax.swing.JTextField txtCorreoIngreso;
     // End of variables declaration//GEN-END:variables
 }
